@@ -45,7 +45,6 @@ class App extends React.Component{
             <div className="container">
 				<CounterList 
 					counters={this.state.counters}
-
 				/>
                 <div>TOTALINVENTORY: 3
                 </div>
