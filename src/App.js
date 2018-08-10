@@ -19,11 +19,11 @@ const CounterList = (props) => {
 			key = {counter.id}
 			countUp = {props.countUp}
       />
-        )
-    })
+        );
+    });
     return(
         <ul>
-        {counters}
+	        {counters}
         </ul>
     );
 }
@@ -33,24 +33,46 @@ class App extends React.Component{
         super();
         this.state = {
             counters: [
-                {id: 'A',count: 0,color: 'tomato'},
+                {id: 'A',count: 0,color: 'salmon'},
                 {id: 'B',count: 0,color: 'skyblue'},
-                {id: 'C',count: 0,color: 'limegreen'}
-            ]
+				{id: 'C',count: 0,color: 'palegreen'},
+				{id: 'D',count: 0,color: 'peachpuff'},
+				{id: 'E',count: 0,color: 'thistle'},
+				{id: 'F',count: 0,color: 'silver'},
+				{id: 'G',count: 0,color: 'silver'},
+				{id: 'h',count: 0,color: 'silver'}
+			],
+			total: 0
 		};
-		this.count
-    }
+		this.countUp = this.countUp.bind(this);
+	}
+	countUp(counter){
+		this.setState(prevState =>{
+			const counters = prevState.counters.map(counter=>{
+				return {id: counter.id,count: counter.count,color: counter.color};
+			});
+			const pos = counters.map(counter => {
+				return counter.id;
+			}).indexOf(counter.id);
+			counters[pos].count++;
+			return{
+				counters: counters,
+				total: prevState.total + 1
+			};
+		});
+	}
     render(){
         return (
             <div className="container">
 				<CounterList 
 					counters={this.state.counters}
+					countUp={this.countUp}
 				/>
-                <div>TOTALINVENTORY: 3
+                <div>TOTALINVENTORY: {this.state.total}
                 </div>
             </div>
         )
-    }
+	}
 }
 
 export default App;
